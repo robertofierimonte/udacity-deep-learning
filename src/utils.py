@@ -76,12 +76,22 @@ def plot_classes_preds(
         matplotlib.figure.Figure: Plot of images with corresponding ground truth and
             predicted labels.
     """
-    preds, probs = _images_to_probs(net, images)
+    # Shuffle the data before plotting
+    perm = torch.randperm(labels.shape[0])
+    images = images[perm, :, :]
+    labels = labels[perm]
+
+    preds, probs = _images_to_probs(net, images[:, None, :, :])
 
     # Plot the images in the batch, along with predicted and true labels
-    fig = plt.figure(figsize=(12, 48))
-    for idx in np.arange(4):
-        ax = fig.add_subplot(1, 4, idx + 1, xticks=[], yticks=[])
+    # Plot at most 100 images
+    ncols = 5
+    nplots = min(images.shape[0], 100)
+    nrows = int(np.ceil(nplots / ncols))
+
+    fig = plt.figure(figsize=(12, 60))
+    for idx in np.arange(nplots):
+        ax = fig.add_subplot(nrows, ncols, idx + 1, xticks=[], yticks=[])
         _matplotlib_imshow(images[idx])
         ax.set_title(
             "{0}, {1:.1f}%\n(label: {2})".format(
