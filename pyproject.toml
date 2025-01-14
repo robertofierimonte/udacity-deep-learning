@@ -15,6 +15,9 @@ matplotlib = "^3.9.2"
 loguru = "^0.7.2"
 tensorboard = "^2.18.0"
 torchinfo = "^1.8.0"
+opencv-python = "^4.10.0.84"
+tqdm = "^4.67.1"
+livelossplot = "^0.5.6"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -23,6 +26,10 @@ ipykernel = "^6.29.5"
 pre-commit = "^4.0.1"
 commitizen = "^4.0.0"
 black = "^24.10.0"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.4"
 
 [build-system]
 requires = ["poetry-core"]

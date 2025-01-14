@@ -7,6 +7,13 @@ repos:
       - id: trailing-whitespace
       - id: detect-private-key
       - id: check-added-large-files
+      - id: mixed-line-ending
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.16.0
+    hooks:
+      - id: pyupgrade
+        args: ["--py312-plus"]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.4.2
@@ -65,3 +72,5 @@ repos:
         args: ["--lock"]
       - id: poetry-lock
         args: ["--no-update"]
+      - id: poetry-export
+        args: ["-f", "requirements.txt", "-o", "requirements.txt"]

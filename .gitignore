@@ -1,11 +1,15 @@
 # Repository-specific files
-/runs/**
-!/runs/**/
-!/runs/**/.gitkeep
+runs/*
+!runs/*.gitkeep
 /data/**
-!/data/**/
-!/data/**/.gitkeep
+data/*
+!data/.gitkeep
 /notebooks/exercises
+assignment-2/landmark_images/*
+!assignment-2/landmark_images/.gitkeep
+!assignment-2/landmark_images/README.md
+assignment-2/checkpoints
+assignment-2/mean_and_std.pt
 
 # Node artifact files
 node_modules/
@@ -174,3 +178,6 @@ $RECYCLE.BIN/
 
 # Pytest cache
 .pytest_cache
+
+# Ruff cache
+.ruff_cache
