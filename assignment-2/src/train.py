@@ -100,9 +100,7 @@ def optimize(data_loaders, model, optimizer, loss, n_epochs, save_path, interact
     # Learning rate scheduler: setup a learning rate scheduler that
     # reduces the learning rate when the validation loss reaches a
     # plateau
-    # HINT: look here:
-    # https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
-    scheduler  = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer)
+    scheduler  = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5)
 
     for epoch in range(1, n_epochs + 1):
 
@@ -178,7 +176,6 @@ def one_epoch_test(test_dataloader, model, loss):
             test_loss = test_loss + ((1 / (batch_idx + 1)) * (loss_value.data.item() - test_loss))
 
             # convert logits to predicted class
-            # HINT: the predicted class is the index of the max of the logits
             pred  = torch.argmax(logits, 1)
 
             # compare predictions to true label

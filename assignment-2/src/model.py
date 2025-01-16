@@ -11,59 +11,59 @@ class MyModel(nn.Module):
         self.backbone = nn.Sequential(
             # Block 1
             nn.Conv2d(3, 64, 3, padding=1),
-            # nn.BatchNorm2d(64),
+            nn.BatchNorm2d(64),
             nn.ReLU(inplace=True),
             nn.Conv2d(64, 64, 3, padding=1),
-            # nn.BatchNorm2d(64),
+            nn.BatchNorm2d(64),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(2, 2),
             # Output size: N x 112 x 112 x 64
 
             # Block 2
             nn.Conv2d(64, 128, 3, padding=1),
-            # nn.BatchNorm2d(128),
+            nn.BatchNorm2d(128),
             nn.ReLU(inplace=True),
             nn.Conv2d(128, 128, 3, padding=1),
-            # nn.BatchNorm2d(128),
+            nn.BatchNorm2d(128),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(2, 2),
             # Output size: N x 56 x 56 x 128
 
             # Block 3
             nn.Conv2d(128, 256, 3, padding=1),
-            # nn.BatchNorm2d(256),
+            nn.BatchNorm2d(256),
             nn.ReLU(inplace=True),
             nn.Conv2d(256, 256, 3, padding=1),
-            # nn.BatchNorm2d(256),
+            nn.BatchNorm2d(256),
             nn.ReLU(inplace=True),
             nn.Conv2d(256, 256, 3, padding=1),
-            # nn.BatchNorm2d(256),
+            nn.BatchNorm2d(256),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(2, 2),
             # Output size: N x 28 x 28 x 256
 
             # Block 4
             nn.Conv2d(256, 512, 3, padding=1),
-            # nn.BatchNorm2d(512),
+            nn.BatchNorm2d(512),
             nn.ReLU(inplace=True),
             nn.Conv2d(512, 512, 3, padding=1),
-            # nn.BatchNorm2d(512),
+            nn.BatchNorm2d(512),
             nn.ReLU(inplace=True),
             nn.Conv2d(512, 512, 3, padding=1),
-            # nn.BatchNorm2d(512),
+            nn.BatchNorm2d(512),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(2, 2),
             # Output size: N x 14 x 14 x 512
 
             # Block 5
             nn.Conv2d(512, 512, 3, padding=1),
-            # nn.BatchNorm2d(512),
+            nn.BatchNorm2d(512),
             nn.ReLU(inplace=True),
             nn.Conv2d(512, 512, 3, padding=1),
-            # nn.BatchNorm2d(512),
+            nn.BatchNorm2d(512),
             nn.ReLU(inplace=True),
             nn.Conv2d(512, 512, 3, padding=1),
-            # nn.BatchNorm2d(512),
+            nn.BatchNorm2d(512),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(2, 2),
             # Output size: N x 7 x 7 x 512
