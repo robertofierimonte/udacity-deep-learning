@@ -42,9 +42,8 @@ def get_data_loaders(
         "train": transforms.Compose(
             [
                 transforms.Resize(256),
-                transforms.CenterCrop(224),
-                transforms.RandomHorizontalFlip(0.3),
-                transforms.RandomRotation((-20, 20), expand=False),
+                transforms.RandomResizedCrop(224),
+                transforms.RandAugment(2, 15, interpolation=transforms.InterpolationMode.BILINEAR),
                 transforms.ToTensor(),
                 transforms.Normalize(mean=mean, std=std),
             ]
@@ -126,6 +125,7 @@ def get_data_loaders(
         batch_size=batch_size,
         sampler=test_sampler,
         num_workers=num_workers,
+        shuffle=False,
     )
 
     return data_loaders
