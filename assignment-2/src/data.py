@@ -168,7 +168,7 @@ def visualize_one_batch(data_loaders, max_n: int = 5):
     fig = plt.figure(figsize=(25, 4))
     for idx in range(max_n):
         ax = fig.add_subplot(1, max_n, idx + 1, xticks=[], yticks=[])
-        ax.imshow(images[idx])
+        ax.imshow(images[idx].numpy())
         # print out the correct label for each image
         # .item() gets the value contained in a Tensor
         ax.set_title(class_names[labels[idx].item()])

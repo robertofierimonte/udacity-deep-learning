@@ -36,7 +36,7 @@ def setup_env():
 
     # Make checkpoints subdir if not existing
     os.makedirs("checkpoints", exist_ok=True)
-    
+
     # Make sure we can reach the installed binaries. This is needed for the workspace
     if os.path.exists("/data/DLND/C2/landmark_images"):
         os.environ['PATH'] = f"{os.environ['PATH']}:/root/.local/bin"
@@ -60,11 +60,11 @@ def get_data_location():
 def download_and_extract(
     url="https://udacity-dlnfd.s3-us-west-1.amazonaws.com/datasets/landmark_images.zip",
 ):
-    
+
     try:
-        
+
         location = get_data_location()
-    
+
     except IOError:
         # Dataset does not exist
         print(f"Downloading and unzipping {url}. This will take a while...")
@@ -76,9 +76,9 @@ def download_and_extract(
                 fp.extractall(".")
 
         print("done")
-                
+
     else:
-        
+
         print(
             "Dataset already downloaded. If you need to re-download, "
             f"please delete the directory {location}"
@@ -95,7 +95,7 @@ def compute_mean_and_std():
     cache_file = "mean_and_std.pt"
     if os.path.exists(cache_file):
         print(f"Reusing cached mean and std")
-        d = torch.load(cache_file)
+        d = torch.load(cache_file, weights_only=True)
 
         return d["mean"], d["std"]
 
