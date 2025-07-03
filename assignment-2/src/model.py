@@ -48,19 +48,6 @@ class MyModel(nn.Module):
             nn.Linear(128, num_classes, bias=True),
         )  # Output size: N x num_classes
 
-        # # Add weights initialisation
-        # for m in self.modules():
-        #     if isinstance(m, nn.Conv2d):
-        #         I.xavier_normal_(m.weight)
-        #         if m.bias is not None:
-        #             I.constant_(m.bias, 0)
-        #     elif isinstance(m, (nn.BatchNorm1d, nn.BatchNorm2d)):
-        #         I.constant_(m.weight, 1)
-        #         I.constant_(m.bias, 0)
-        #     elif isinstance(m, nn.Linear):
-        #         I.xavier_normal_(m.weight)
-        #         I.constant_(m.bias, 0)
-
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.backbone(x)
         x = torch.flatten(x, 1)
