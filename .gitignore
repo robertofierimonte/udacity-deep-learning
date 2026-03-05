@@ -1,11 +1,9 @@
 # Repository-specific files
-/runs/**
-!/runs/**/
-!/runs/**/.gitkeep
+mlflow.db
+/mlruns/**
 /data/**
 !/data/**/
 !/data/**/.gitkeep
-/notebooks/exercises
 
 # Node artifact files
 node_modules/

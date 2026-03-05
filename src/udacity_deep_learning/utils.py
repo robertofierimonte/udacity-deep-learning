@@ -5,26 +5,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as nnF
-import torchvision.transforms.functional as tF
 from torch import Tensor
-
-
-def show_grid(imgs: list[Tensor] | Tensor) -> None:
-    """Show a grid of images using matplotlib.
-
-    Args:
-        imgs (list[Tensor] | Tensor): Image tensor with shape N x C x H x W, or list
-            of len N of tensors with shape C x H x W.
-    """
-    if not isinstance(imgs, list):
-        imgs = [imgs]
-
-    _, axs = plt.subplots(ncols=len(imgs), squeeze=False)
-    for i, img in enumerate(imgs):
-        img = img.detach()
-        img = tF.to_pil_image(img)
-        axs[0, i].imshow(np.asarray(img))
-        axs[0, i].set(xticklabels=[], yticklabels=[], xticks=[], yticks=[])
 
 
 def _matplotlib_imshow(img: Tensor) -> None:
@@ -54,6 +35,27 @@ def _images_to_probs(net: nn.Module, images: Tensor) -> tuple[np.ndarray, list[f
     _, preds_tensor = torch.max(output, 1)
     preds = np.squeeze(preds_tensor.numpy())
     return preds, [nnF.softmax(el, dim=0)[i].item() for i, el in zip(preds, output)]
+
+
+def plot_grid(imgs: list[Tensor] | Tensor) -> matplotlib.figure.Figure:
+    """Plot a grid of images using matplotlib.
+
+    Args:
+        imgs (list[Tensor] | Tensor): Image tensor with shape N x C x H x W, or list
+            of len N of tensors with shape C x H x W.
+    """
+    if isinstance(imgs, list):
+        imgs = torch.stack(imgs, 0)
+    elif imgs.ndim != 4:
+        imgs = imgs.unsqueeze(0)
+    imgs = imgs.cpu()
+
+    fig = plt.figure()
+    for i in range(imgs.shape[0]):
+        _ = fig.add_subplot(1, imgs.shape[0], i + 1, xticks=[], yticks=[])
+        img = imgs[i][0]
+        _matplotlib_imshow(img)
+    return fig
 
 
 def plot_classes_preds(
