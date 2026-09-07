@@ -1,16 +1,15 @@
 import atexit
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Literal
 
 import click
 import mlflow
 import torch
-import torch.nn as nn
-import torch.optim as optim
 from loguru import logger
 from mlflow.models.signature import infer_signature
+from torch import nn, optim
 from torch.utils.data import DataLoader, random_split
 from torch.utils.tensorboard import SummaryWriter
 from torchinfo import summary
@@ -39,7 +38,7 @@ def main(model: Literal["densenet", "lenet5"]) -> None:
 
     # Initialize MLflow tracking
     mlflow.set_experiment("handwritten-digits-classifier")
-    run_name = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S")
+    run_name = datetime.now(UTC).strftime("%Y%m%dT%H%M%S")
     run = mlflow.start_run(run_name=run_name, log_system_metrics=True)
     run_path = run.info.artifact_uri
 
