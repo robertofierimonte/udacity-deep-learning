@@ -3,9 +3,8 @@ import matplotlib.figure
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
-import torch.nn as nn
 import torch.nn.functional as nnF
-from torch import Tensor
+from torch import Tensor, nn
 
 
 def _matplotlib_imshow(img: Tensor) -> None:
@@ -96,9 +95,7 @@ def plot_classes_preds(
         ax = fig.add_subplot(nrows, ncols, idx + 1, xticks=[], yticks=[])
         _matplotlib_imshow(images[idx])
         ax.set_title(
-            "{0}, {1:.1f}%\n(label: {2})".format(
-                classes[preds[idx]], probs[idx] * 100.0, classes[labels[idx]]
-            ),
+            f"{classes[preds[idx]]}, {probs[idx] * 100.0:.1f}%\n(label: {classes[labels[idx]]})",
             color=("green" if preds[idx] == labels[idx].item() else "red"),
         )
     return fig
